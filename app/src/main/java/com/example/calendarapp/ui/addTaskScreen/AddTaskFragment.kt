@@ -44,7 +44,7 @@ class AddTaskFragment : Fragment() {
         binding.viewModel = viewModel
 
         isDateSelected?.let {
-            if (it) binding.btnSelectDate.text = selectedDate
+            if (it) binding.tvSelectedDate.text = selectedDate
         }
 
         binding.btnSelectDate.setOnClickListener {
@@ -54,7 +54,7 @@ class AddTaskFragment : Fragment() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val dialog = DatePickerDialog(requireContext() , DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                binding.btnSelectDate.text = "$dayOfMonth ${getMonth(month + 1)} $year"
+                binding.tvSelectedDate.text = "$dayOfMonth ${getMonth(month + 1)} $year"
             }, year, month, day)
             dialog.show()
         }
@@ -62,7 +62,7 @@ class AddTaskFragment : Fragment() {
         binding.btnAddTask.setOnClickListener {
             val title = binding.etTitle.text.toString()
             val description = binding.etDescription.text.toString()
-            val selectedDate = binding.btnSelectDate.text.toString()
+            val selectedDate = binding.tvSelectedDate.text.toString()
 
             if (title.isNotEmpty() && description.isNotEmpty() && selectedDate.isNotEmpty()) {
                 val taskDetail = TaskDetail(title, description, selectedDate)
